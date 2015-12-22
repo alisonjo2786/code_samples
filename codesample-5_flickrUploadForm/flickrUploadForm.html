@@ -1,0 +1,289 @@
+<!DOCTYPE html >
+<html>
+<head>
+
+<title>Upload Your Rally Photos | Rally for America</title>
+
+<script type="text/javascript">
+function flickr_findErrors() {
+	errorMsg = "";
+	errorDiv = document.getElementById("errors");
+	var urlStr = window.location.toString();
+	form = document.rally_upload;
+	var urlQuer = urlStr.split("?");
+	var isError = /(error=true&)/;
+	if (isError.test(urlQuer[1])) {
+		var isSize = /(size=1)/;
+		var isCaptcha = /(cp=1)/;
+		if (isSize.test(urlQuer[1])) {
+			errorMsg += "&nbsp;&nbsp;&nbsp;&nbsp;&ndash;&nbsp;Image file exceeds 2MB maximum.<br />";
+		}
+		if (errorMsg != null && errorMsg != "") {
+			errorMsg = "Submission Error:<br />" + errorMsg + "Please re-select your image and try again.";
+			errorDiv.innerHTML = errorMsg;
+			errorDiv.style.display = "block";
+			errorDiv.style.visibility = "visible";
+		}
+	} else {
+		errorDiv.style.display = "none";
+		errorDiv.style.visibility = "hidden";
+	}
+	flickr_cookieExists("fieldvals",form);
+}
+function flickr_cookieExists(c_name,form) {
+	if (document.cookie.length>0) {
+		c_start=document.cookie.indexOf(c_name + "=");
+		if (c_start!=-1) {
+			c_start=c_start + c_name.length+1 ;
+			c_end=document.cookie.indexOf(";",c_start);
+			if (c_end==-1) {
+				c_end=document.cookie.length;
+			}
+				flickr_printCookie(unescape(document.cookie.substring(c_start,c_end)),form);
+			
+		}
+	}
+}
+</script>
+
+<style>
+#errors {width:320px;margin-bottom:14px;padding:10px 16px;border:thin solid #F00;background-color:#FFD5D5;color:red;}
+.note {font-size:0.75em;color:red;font-style:italic;}
+</style>
+
+</head>
+<body class="rally" onload="flickr_findErrors();">
+
+<h1>Upload your Photos</h1>
+<div id="errors" style="display:none;visibility:hidden;">&nbsp;</div>
+<script type="text/javascript">
+function flickr_validate(form) {
+	fail  = flickr_validateFname(form.fname.value);
+	fail += flickr_validateLname(form.lname.value);
+	fail += flickr_validateAssociation(form.association.value);
+	fail += flickr_validateCity(form.city.value);
+	fail += flickr_validateState(form.state.value);
+	fail += flickr_validateZip(form.zip.value);
+	fail += flickr_validateEmail(form.email.value);
+	fail += flickr_validateImage(form.image.value);
+	fail += flickr_validateTitle(form.title.value);
+	fail += flickr_validateDescription(form.description.value);
+	if (fail == "") {
+		doCookie = flickr_checkCookie(form);
+		if (doCookie) {
+			return true;
+		} else {
+			return false;
+		}
+	}	else {
+		alert(fail);
+		return false;
+	}
+}
+</script>
+
+<p class="note">All fields except "Photo Description" and "Tags" are required</p>
+
+<form method="post" action="index.php" enctype="multipart/form-data" name="rally_upload" id="rally_upload" onsubmit="return flickr_validate(this);">
+<table id="flickr-upload" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="200px">First Name:</td>
+<td><input type="text" name="fname" /></td>
+</tr>
+<tr>
+<td>Last Name:</td>
+<td><input type="text" name="lname" /></td>
+</tr>
+
+<tr>
+<td>Association:</td>
+<td><input type="text" name="association" /></td>
+</tr>
+<tr>
+<td width="">City:</td><td><input type="text" name="city"/></td>
+</tr>
+<tr>
+<td width="">State:</td><td><select name="state"> <option selected="selected" value="">&nbsp;</option> <option value="AK">AK</option> <option value="AL">AL</option> <option value="AR">AR</option> <option value="AZ">AZ</option> <option value="CA">CA</option> <option value="CO">CO</option> <option value="CT">CT</option> <option value="DC">DC</option> <option value="DE">DE</option> <option value="FL">FL</option> <option value="GA">GA</option> <option value="GU">GU</option> <option value="HI">HI</option> <option value="IA">IA</option> <option value="ID">ID</option> <option value="IL">IL</option> <option value="IN">IN</option> <option value="KS">KS</option> <option value="KY">KY</option> <option value="LA">LA</option> <option value="MA">MA</option> <option value="MD">MD</option> <option value="ME">ME</option> <option value="MI">MI</option> <option value="MN">MN</option> <option value="MO">MO</option> <option value="MS">MS</option> <option value="MT">MT</option> <option value="NC">NC</option> <option value="ND">ND</option> <option value="NE">NE</option> <option value="NH">NH</option> <option value="NJ">NJ</option> <option value="NM">NM</option> <option value="NV">NV</option> <option value="NY">NY</option> <option value="OH">OH</option> <option value="OK">OK</option> <option value="OR">OR</option> <option value="PA">PA</option> <option value="PR">PR</option> <option value="RI">RI</option> <option value="SC">SC</option> <option value="SD">SD</option> <option value="TN">TN</option> <option value="TX">TX</option> <option value="UT">UT</option> <option value="VA">VA</option> <option value="VI">VI</option> <option value="VT">VT</option> <option value="WA">WA</option> <option value="WI">WI</option> <option value="WV">WV</option> <option value="WY">WY</option></select></td>
+</tr>
+<tr>
+<td width="">ZIP:</td><td><input type="text" name="zip" /></td>
+</tr>
+<tr>
+<td>E-mail Address:</td>
+<td><input type="text" name="email" /></td>
+</tr>
+<tr>
+<td>Picture Upload:</td>
+<td><input type="file" name="image" id="imgupload" accept="image/gif, image/jpeg, image/png" />
+</td>
+</tr>
+
+<tr>
+<td colspan="2" class="note">Allowed file types: jpeg, gif, png<br />Maximum file size: 2MB</td>
+</tr>
+<tr>
+<td width="200px">Picture Title:</td>
+<td><input type="text" name="title" size="26" /></td>
+</tr>
+<tr>
+<td>Picture Description:<br /></td>
+<td><textarea name="description" cols="20" rows="4"></textarea></td>
+</tr>
+<tr>
+
+<td colspan="2" class="note">Maximum 150 characters allowed</td>
+</tr>
+<tr>
+<td width="200px">Tags:</td>
+<td><input type="text" name="tags" size="26" /></td>
+</tr>
+<tr>
+<td colspan="2" class="note">Enter tags separated by spaces, with multi-word tags inside quotes. Examples: PTA "get out the vote" TPAC<br />The tags "America Rally" and the state you selected above will be added automatically.</td>
+</tr>
+</table>
+
+<p>By submitting this form, you consent to Our Organization's use of the photo and the information provided for promotional and other purposes without additional compensation or attribution, except where prohibited by law.</p>
+
+<input type="hidden" name="formname" value="rally" />
+<input class="submit" type="submit" name="submit" value="Submit" />
+</form>
+
+<script type="text/javascript">
+function flickr_validateFname(field) {
+	if (field == "") return "No First Name was entered.\n"
+	return ""
+}
+function flickr_validateLname(field) {
+	if (field == "") return "No Last Name was entered.\n"
+	return ""
+}
+function flickr_validateAssociation(field) {
+	if (field == "") return "No Association was entered.\n"
+	return ""
+}
+function flickr_validateCity(field) {
+	if (field == "") return "No City was entered.\n"
+	return ""
+}
+function flickr_validateState(field) {
+	if (field == "") return "No State was selected.\n"
+	return ""
+}
+function flickr_validateZip(field) {
+	if (field == "") return "No ZIP was entered.\n"
+	return ""
+}
+function flickr_validateEmail(field) {
+	if (field == "") return "No Email was entered.\n"
+		else if (!((field.indexOf(".") > 0) &&
+			       (field.indexOf("@") > 0)) ||
+			       /[^a-zA-Z0-9.@_-]/.test(field))
+		return "The Email address is invalid.\n"
+	return ""
+}
+function flickr_validateImage(field) {
+	var imgPatt = /^[^\\\|\:\*\"]+\.(jpg|png|gif)$/i;
+	if (field == "") return "No Image was selected for upload.\n"
+	return ""
+}
+function flickr_validateTitle(field) {
+	if (field == "") return "No Picture Title was entered.\n"
+	return ""
+}
+function flickr_validateDescription(field) {
+	if ((field != "") && (field.length > 150)) {
+		return "Picture description exceeds maximum length (150 characters).\n"
+	} else {
+		return ""
+	}
+}
+function flickr_validateMember(field) {
+	if (field == "") return "No Member of Congress was entered.\n"
+	return ""
+}
+
+function flickr_getCookie(c_name) {
+	if (document.cookie.length>0) {
+		c_start=document.cookie.indexOf(c_name + "=");
+		if (c_start!=-1) {
+			c_start=c_start + c_name.length+1 ;
+			c_end=document.cookie.indexOf(";",c_start);
+			if (c_end==-1) {
+				c_end=document.cookie.length;
+				return unescape(document.cookie.substring(c_start,c_end));
+			}
+    }
+  }
+	return "";
+}
+function flickr_setCookie(c_name,value,expiredays) {
+	var exdate=new Date();
+	exdate.setTime(exdate.getTime()+expiredays);
+	document.cookie=c_name+ "=" +escape(value)+((expiredays==null) ? "" : "; expires="+exdate.toUTCString());
+}
+function flickr_printCookie(fieldvals,form) {
+	html = fieldvals;
+	htmlSplit = [];
+	htmlSplitTwice = [];
+	regexPipes = /\|/gi;
+	pipesFound = html.match(regexPipes);
+	if (pipesFound) {
+		htmlSplit = html.split("|");
+		for (i = 0; i < (htmlSplit.length - 1); i++) {
+			regexTilde = /~/gi;
+			tildesFound = htmlSplit[i].match(regexTilde);
+			if (tildesFound) {
+				htmlSplitTwice[i] = htmlSplit[i].split("~");
+			}
+		}
+		for (k=0; k<form.length; k++) {
+			if ((form.elements[k].name != "submit") && (form.elements[k].name != "formname") && (form.elements[k].name != "image") && (form.elements[k].name != "recaptcha_challenge_field") && (form.elements[k].name != "recaptcha_response_field")) {
+				storedVal = flickr_getStoredVal(form.elements[k].name,htmlSplitTwice);
+				form.elements[k].value = storedVal;
+			} else {
+				continue;
+			}
+		}
+	} else {
+		html = "no pipes found...?";
+	}
+}
+function flickr_getStoredVal(formFld,dblArray) {
+	formFldVal = "";
+	for (m = 0; m<dblArray.length; m++) {
+		if (dblArray[m][0] == formFld) {
+			formFldVal = dblArray[m][1];
+			break;
+		}
+	}
+	return formFldVal;
+}
+function flickr_cookieValue(form) {
+	fieldvals = "";
+	for (i=0; i<form.length; i++) {
+		if ((form.elements[i].name != "submit") && (form.elements[i].name != "formname") && (form.elements[i].name != "image")) {
+			if (form.elements[i].value != null && form.elements[i].value != "") {
+				fieldvals += form.elements[i].name + "~" + form.elements[i].value + "|";
+			} else {
+				continue;
+			}
+		} else {
+			continue;
+		}
+	}
+	if (fieldvals != null && fieldvals != "") {
+		flickr_setCookie("fieldvals",fieldvals,45000);//45 seconds
+		return true;
+	}
+}
+function flickr_checkCookie(form) {	
+	fieldvals = flickr_getCookie("fieldvals");
+	if (fieldvals != null && fieldvals != "") {
+		flickr_setCookie("fieldvals",fieldvals,-60000);
+	}
+	return flickr_cookieValue(form);
+}
+</script>
+
+</body>
+</html>

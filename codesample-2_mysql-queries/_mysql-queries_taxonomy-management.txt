@@ -1,0 +1,24 @@
+/**commerce connection
+ * (12 applicable fields)
+ */
+SELECT a.* FROM ( SELECT entity_type, bundle, entity_id, field_admin_officials_tid AS tid FROM field_data_field_admin_officials UNION SELECT entity_type, bundle, entity_id, field_affected_target_id AS tid FROM field_data_field_affected UNION SELECT entity_type, bundle, entity_id, field_ca_title_tid AS tid FROM field_data_field_ca_title UNION SELECT entity_type, bundle, entity_id, field_categories_tid AS tid FROM field_data_field_categories UNION SELECT entity_type, bundle, entity_id, field_intended_audience_tid AS tid FROM field_data_field_intended_audience UNION SELECT entity_type, bundle, entity_id, field_leadership_officials_target_id AS tid FROM field_data_field_leadership_officials UNION SELECT entity_type, bundle, entity_id, field_orgs_group_single_tid AS tid FROM field_data_field_orgs_group_single UNION SELECT entity_type, bundle, entity_id, field_orgs_groups_tid AS tid FROM field_data_field_orgs_groups UNION SELECT entity_type, bundle, entity_id, field_owner_tid AS tid FROM field_data_field_owner UNION SELECT entity_type, bundle, entity_id, field_profile_tags_cer_target_id AS tid FROM field_data_field_profile_tags_cer UNION SELECT entity_type, bundle, entity_id, field_tags_tid AS tid FROM field_data_field_tags UNION SELECT entity_type, bundle, entity_id, field_tool_type_tid AS tid FROM field_data_field_tool_type ) AS a WHERE tid=98;
+
+
+/**commerce.gov & OGC
+ * (16 applicable fields)
+ */
+SELECT a.* FROM ( SELECT entity_type, bundle, entity_id, field_admin_officials_tid AS tid FROM field_data_field_admin_officials UNION SELECT entity_type, bundle, entity_id, field_affected_target_id AS tid FROM field_data_field_affected UNION SELECT entity_type, bundle, entity_id, field_ca_title_tid AS tid FROM field_data_field_ca_title UNION SELECT entity_type, bundle, entity_id, field_categories_tid AS tid FROM field_data_field_categories UNION SELECT entity_type, bundle, entity_id, field_intended_audience_tid AS tid FROM field_data_field_intended_audience UNION SELECT entity_type, bundle, entity_id, field_leadership_officials_target_id AS tid FROM field_data_field_leadership_officials UNION SELECT entity_type, bundle, entity_id, field_news_media_contact_tid AS tid FROM field_data_field_news_media_contact UNION SELECT entity_type, bundle, entity_id, field_news_type_tid AS tid FROM field_data_field_news_type UNION SELECT entity_type, bundle, entity_id, field_official_title_cer_target_id AS tid FROM field_data_field_official_title_cer UNION SELECT entity_type, bundle, entity_id, field_orgs_group_single_tid AS tid FROM field_data_field_orgs_group_single UNION SELECT entity_type, bundle, entity_id, field_orgs_groups_tid AS tid FROM field_data_field_orgs_groups UNION SELECT entity_type, bundle, entity_id, field_owner_tid AS tid FROM field_data_field_owner UNION SELECT entity_type, bundle, entity_id, field_profile_tags_cer_target_id AS tid FROM field_data_field_profile_tags_cer UNION SELECT entity_type, bundle, entity_id, field_school_tid AS tid FROM field_data_field_school UNION SELECT entity_type, bundle, entity_id, field_tags_tid AS tid FROM field_data_field_tags UNION SELECT entity_type, bundle, entity_id, field_tool_type_tid AS tid FROM field_data_field_tool_type ) AS a WHERE tid=445;
+
+
+/**field collections
+ * (3 applicable FCs)
+ */
+SELECT bundle, entity_id, revision_id, delta, field_work_history_value FROM field_data_field_work_history WHERE field_work_history_value=179;
+
+SELECT bundle, entity_id, revision_id, delta, field_content_attribution_value FROM field_data_field_content_attribution WHERE field_content_attribution_value=1380;
+
+SELECT bundle, entity_id, revision_id, delta, field_education_value FROM field_data_field_education WHERE field_education_value=64;
+
+
+
+(Originally used for moderating Suggestions terms on CC, https://www.wrike.com/open.htm?id=20229325)

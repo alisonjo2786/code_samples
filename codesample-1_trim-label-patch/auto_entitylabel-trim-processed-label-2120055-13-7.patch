@@ -1,0 +1,13 @@
+diff --git a/auto_entitylabel.module b/auto_entitylabel.module
+index a5216cd..fbe7752 100644
+--- a/auto_entitylabel.module
++++ b/auto_entitylabel.module
+@@ -385,7 +385,7 @@ function _auto_entitylabel_patternprocessor($pattern, $entity, $entity_type, $la
+     $output = auto_entitylabel_eval($output, $entity, $language);
+   }
+   // Strip tags.
+-  $output = preg_replace('/[\t\n\r\0\x0B]/', '', strip_tags($output));
++  $output = preg_replace('/\s\s+/', ' ', (preg_replace('/[\t\n\r\0\x0B]/', '', trim(strip_tags($output)))));
+   return $output;
+ }
+ 

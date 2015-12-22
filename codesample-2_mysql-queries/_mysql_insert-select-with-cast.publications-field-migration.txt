@@ -1,0 +1,1 @@
+insert into field_data_field_publication (entity_type,bundle,deleted,entity_id,revision_id,language,delta,field_publication_value,field_publication_format) (select entity_type, bundle, deleted, entity_id, revision_id, language, delta, cast(field_publications_value AS char(500)), field_publications_format from field_data_field_publications);

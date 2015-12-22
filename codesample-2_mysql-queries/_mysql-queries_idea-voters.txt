@@ -1,0 +1,4 @@
+~~for grabbing lists of voters per idea~~
+
+Query options and output examples are in this Wrike task:
+https://www.wrike.com/open.htm?id=48734762
